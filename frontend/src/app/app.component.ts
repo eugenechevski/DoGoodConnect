@@ -30,6 +30,12 @@ export class AppComponent {
     window.location.href = link;
   }
 
+  adjustHeight(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     // Get where the user clicked

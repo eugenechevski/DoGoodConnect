@@ -8,5 +8,5 @@
     <a (click)="navigateTo('/login')" class="dropdown-item">Login</a>
   </div>
 </div>
-<textarea class="bar" placeholder="Enter Prompt"></textarea>
+<textarea class="bar" rows="1" placeholder="Enter Prompt" (input)="adjustHeight($event)"></textarea>
 <router-outlet />
