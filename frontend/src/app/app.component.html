@@ -1,12 +1,18 @@
 <div class="settings">
-  <button type="button" (click)="toggleDropdown()" id="settings-button">
-    <img src="../assets/settings.svg" />
+  <button (click)="toggleDropdown()">
+    <img src="assets/settings.svg" alt="Settings">
   </button>
 
   <div id="dropdown-menu" class="hidden">
-    <a (click)="navigateTo('/register')" class="dropdown-item">Register</a>
-    <a (click)="navigateTo('/login')" class="dropdown-item">Login</a>
+    <a class="dropdown-item" (click)="navigateTo('/register')">Register</a>
+    <a class="dropdown-item" (click)="navigateTo('/login')">Login</a>
   </div>
 </div>
-<textarea class="bar" rows="1" placeholder="Enter Prompt" (input)="adjustHeight($event)"></textarea>
-<router-outlet />
+
+<div class="search-container">
+  <input type="text" class="search-bar" placeholder="Search for volunteer opportunities...">
+  <button class="search-button" (click)="searchClicked()">Search</button>
+</div>
+
+<app-search-results *ngIf="showSearchResults"></app-search-results>
+

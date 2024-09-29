@@ -73,3 +73,41 @@
   .hidden {
     display: none;
   }
+  
+  .search-container {
+    position: absolute;
+    left: 20%;
+    top: 46.5%;
+    width: 60%;
+    height: 7%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar {
+    flex-grow: 1;
+    height: 100%;
+    font-size: 200%;
+    text-align: left;
+    padding: 0 10px;
+    background-color: rgba(217, 217, 217, 0.2);
+    border: 2px solid black;
+    border-radius: 13px 0 0 13px;
+    box-sizing: border-box;
+  }
+  
+  .search-button {
+    height: 100%;
+    font-size: 200%;
+    padding: 0 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid black;
+    border-left: none;
+    border-radius: 0 13px 13px 0;
+    cursor: pointer;
+  }
+  
+  .search-button:hover {
+    background-color: #45a049;
+  }

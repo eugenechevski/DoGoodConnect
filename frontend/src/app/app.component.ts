@@ -1,17 +1,15 @@
 import { Component, HostListener } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Do Good Connect';
 
   dropdownVisible = false;
+  showSearchResults = false;
 
   toggleDropdown() {
     const dropdown = document.getElementById("dropdown-menu");
@@ -34,6 +32,10 @@ export class AppComponent {
     const textarea = event.target as HTMLTextAreaElement;
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
+  searchClicked() {
+    this.showSearchResults = true;
   }
 
   @HostListener('document:click', ['$event'])
