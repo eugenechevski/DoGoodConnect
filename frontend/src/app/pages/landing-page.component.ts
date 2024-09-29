@@ -43,12 +43,12 @@ export class LandingPageComponent {
     const textarea = document.getElementById("text") as HTMLTextAreaElement;
     const searchString = textarea.value;
     const query = searchString?.replaceAll(' ', '+');
-    this.router.navigate(['/results'], { state: { data: this.results } });
-    // this.http.get(`http://localhost:3000/search?q=${query}`).subscribe(
-    //   (res) => {
-    //     this.router.navigate(['/results'], { state: { data: res } });
-    //   }
-    // ),
+    // this.router.navigate(['/results'], { state: { data: this.results } });
+    this.http.get(`http://localhost:3000/search?q=${query}+volunteering`).subscribe(
+      (res) => {
+        this.router.navigate(['/results'], { state: { data: res } });
+      }
+    ),
     (error: Error) => {
       console.error('API call failed', error);
     }
