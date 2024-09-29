@@ -1,1 +1,43 @@
+.result-container {
+  margin-left: 12%;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20%;
+}
 
+.result-item {
+  background-color: #DEDEDE;
+  border: 3px solid black;
+  border-radius: 13px;
+  margin-bottom: 4%;
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+
+  a {
+    color: black
+  }
+}
+
+#title {
+  margin-bottom: 2%;
+}
+
+.result-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+@media (max-width: 768px) {
+  .search-result-item {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .search-result-item {
+    width: 100%;
+  }
+}

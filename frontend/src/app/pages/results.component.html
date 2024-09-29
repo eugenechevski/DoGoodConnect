@@ -1,3 +1,16 @@
-<div class="picture-container">
+<div *ngIf="results && results.length > 0" class="result-container">
+  <div *ngFor="let result of results" class="result-item">
+    <a [href]="result.link" target="_blank">
+      <div class="result-image"><img [src]="result.image"></div>
+      <div id="title" class="result-title"><b>Title:</b> {{ result.title }}</div>
+      <div class="result-location">{{ result.location }}</div>
+      <div class="result-phone">{{ result.phone }}</div>
+      <div class="result-email">{{ result.email }}</div>
+    </a>
+  </div>
+</div>
+
+<div *ngIf="!results || results.length === 0">
+  <p>No results found</p>
 </div>
 <router-outlet />
