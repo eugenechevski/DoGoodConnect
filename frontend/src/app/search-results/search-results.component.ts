@@ -15,6 +15,7 @@ export class SearchResultsComponent implements OnInit {
     this.searchResultsService.getSearchResults().subscribe(
       results => {
         this.searchResults = results;
+        console.log('Search results:', this.searchResults);
       },
       error => {
         console.error('Error fetching search results:', error);

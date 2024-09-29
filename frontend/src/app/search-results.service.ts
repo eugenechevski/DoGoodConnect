@@ -26,7 +26,7 @@ export class SearchResultsService {
 
   getSearchResults(): Observable<SearchResult[]> {
     // Replace this URL with the actual endpoint where your JSON data is hosted
-    return this.http.get<SearchResponse>('assets/sample.json').pipe(
+    return this.http.get<SearchResponse>('https://localhost:3000').pipe(
       map(response => response.data)
     );
   }

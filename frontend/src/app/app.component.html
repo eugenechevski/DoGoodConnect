@@ -1,6 +1,6 @@
 <div class="settings">
   <button (click)="toggleDropdown()">
-    <img src="assets/settings.svg" alt="Settings">
+    ⚙️
   </button>
 
   <div id="dropdown-menu" class="hidden">
@@ -10,9 +10,16 @@
 </div>
 
 <div class="search-container">
-  <input type="text" class="search-bar" placeholder="Search for volunteer opportunities...">
-  <button class="search-button" (click)="searchClicked()">Search</button>
+  <mat-form-field class="search-bar">
+    <input matInput type="text" [(ngModel)]="value">
+    @if (value) {
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+
+  <button class="search-button" mat-flat-button (click)="searchClicked()">Search</button>
 </div>
 
 <app-search-results *ngIf="showSearchResults"></app-search-results>
-

@@ -3,13 +3,14 @@ import { Component, HostListener } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'Do Good Connect';
 
   dropdownVisible = false;
   showSearchResults = false;
+  value = "";
 
   toggleDropdown() {
     const dropdown = document.getElementById("dropdown-menu");
