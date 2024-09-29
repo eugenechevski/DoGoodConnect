@@ -1,0 +1,12 @@
+<div class="settings">
+  <button type="button" (click)="toggleDropdown()" id="settings-button">
+    <img src="../assets/settings-logo.svg" />
+  </button>
+
+  <div id="dropdown-menu" class="hidden">
+    <a (click)="navigateTo('/register')" class="dropdown-item">Register</a>
+    <a (click)="navigateTo('/login')" class="dropdown-item">Login</a>
+  </div>
+</div>
+<textarea class="bar" rows="1" placeholder="Enter Prompt" (input)="adjustHeight($event)"></textarea>
+<router-outlet />
