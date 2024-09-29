@@ -1,2 +1,6 @@
 bin/**
 node_modules
+.env
+/secret
+.DS_Store
+*/.DS_Store

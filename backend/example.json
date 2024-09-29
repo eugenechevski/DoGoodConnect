@@ -1,0 +1,23 @@
+{
+  "message": "Success",
+  "events": [
+    {
+      "title": "example name",
+      "link": "example link",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeXjESVFpXsPG6DX0HTiR66td0MsWg2OikQg&s",
+      "phone": [
+        "123-456-7890",
+        "123-456-7890"
+      ],
+      "email": [
+        "a@b.c",
+        "a@b.c"
+      ],
+      "location": [
+        "123 asd street, qwerty FL 12345",
+        "123 asd street, qwerty FL 12345"
+      ],
+      "hasForm": true
+    }
+  ]
+}
