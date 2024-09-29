@@ -1,11 +1,15 @@
 {
   "name": "backend",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@google-cloud/language": "^6.5.0",
     "axios": "^1.7.7",
