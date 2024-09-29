@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const language = require('@google-cloud/language');
 
 const client = new language.LanguageServiceClient();
+// Example usage
 
 const getEvents = async (query) => {
   const searchResults = await fetchSearchLinks(query);
@@ -22,19 +23,20 @@ const fetchSearchLinks = async (query) => {
       q: query,
     },
   });
-  return response.data; 
+  return response.data;
 };
 
 const extractLinks = async (results) => {
   const links = results.items.map(item => ({ link: item.link, title: item.title, image: item.pagemap.cse_thumbnail[0].src }));
   return links;
-}
+};
 
 const extractHtml = async (links) => {
   const textArray = [];
   for (const link of links) {
     const text = await extractTextFromUrl(link.link);
-    textArray.push({ text: text, link: link.link, title: link.title, image: link.image });
+    const emailList = extractUniqueEmailPatterns(text);
+    textArray.push({ text: text, link: link.link, title: link.title, image: link.image, emails: emailList });
   }
   return textArray;
 };
@@ -45,14 +47,14 @@ const extractTextFromUrl = async (url) => {
 
   await page.goto(url);
 
-  console.log('EVAL Start: ');
+  console.log('EVAL Start: ', );
   const extractedText = await page.$$eval('p', elements =>
     elements.map(el => el.innerText)
   );
-  console.log('EVAL End: ');
+  console.log('EVAL End: ', );
   await browser.close();
-  return extractedText;
-}
+  return extractedText.join(" ");
+};
 
 const chunkHtml = (text, maxChunkSize = 900000) => {
   return text.slice(0, maxChunkSize);
@@ -64,7 +66,7 @@ const extractEntities = async (texts) => {
     console.log('Processing document!');
     const result = await analyzeEntitiesFromHtml(text.text);
     if (result) {
-      results.push({ link: text.link, entities: result, title: text.title, image: text.image });
+      results.push({ link: text.link, entities: result, title: text.title, image: text.image, emails: text.emails });
     }
   }
   return results;
@@ -86,12 +88,18 @@ const analyzeEntitiesFromHtml = async (text) => {
   }
 };
 
+const extractUniqueEmailPatterns = (text) => {
+  const emailPattern = /\b\w+@\w+\.\w+\b/g;
+  const matches = text.match(emailPattern);
+  const uniqueEmails = new Set(matches);
+  return Array.from(uniqueEmails);
+}
+
 const shrinkEntities = async (entities) => {
   const result = [];
   for (const file of entities) {
     const newEntities = [];
     const phones = [];
-    const emails = [];
     const addresses = [];
     for (const entity of file.entities) {
       if (entity.type === 'LOCATION') {
@@ -107,7 +115,7 @@ const shrinkEntities = async (entities) => {
         phones.push(entity.name);
       }
     }
-    result.push({ title: file.title, link: file.link, location: addresses, phone: phones, email: emails, image: file.image, hasForm: false });
+    result.push({ title: file.title, link: file.link, location: addresses, phone: phones, email: file.emails, image: file.image });
   }
   return result;
 };
