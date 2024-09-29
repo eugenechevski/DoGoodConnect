@@ -1,15 +1,22 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, HostListener } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    RouterModule,
+    HttpClientModule
+  ],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent {
-  title = 'frontend';
+  title = 'Do Good';
+
+  constructor(private http: HttpClient, private router: Router) {};
 
   dropdownVisible = false;
 
@@ -26,14 +33,25 @@ export class LandingPageComponent {
       dropdown.classList.add("hidden");
   }
 
-  navigateTo(link: string) {
-    window.location.href = link;
-  }
-
   adjustHeight(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
+  navigateTo() {
+    const textarea = document.getElementById("text") as HTMLTextAreaElement;
+    const searchString = textarea.value;
+    const query = searchString?.replaceAll(' ', '+');
+    // console.log(query);
+    // this.http.get(`http://localhost:3000/search?q=${query}`).subscribe(
+    //   (res) => {
+    //     this.router.navigate(['/results'], { state: { data: res } });
+    //   }
+    // ),
+    (error: Error) => {
+      console.error('API call failed', error);
+    }
   }
 
   @HostListener('document:click', ['$event'])
